@@ -24,8 +24,8 @@ jobs:
         context: .
         push: true
         tags: |
-          hilmiafifi/node-express-rest-api-example:latest
-          hilmiafifi/node-express-rest-api-example:${{ github.sha }}
+          ${{ secrets.DOCKERHUB_USERNAME }}/cicd-node-express-rest-api-example:latest
+          ${{ secrets.DOCKERHUB_USERNAME }}/cicd-node-express-rest-api-example:${{ github.sha }}
         dockerfile: Dockerfile
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
