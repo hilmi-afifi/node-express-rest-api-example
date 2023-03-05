@@ -109,9 +109,3 @@ The result is:
 
 
 
-
-
-
-
-
-
