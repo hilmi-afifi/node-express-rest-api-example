@@ -18,14 +18,18 @@ jobs:
         node-version: '14.x'
     - run: npm ci
     - run: npm run test
+    
+    - name: Login to DockerHub
+      uses: docker/login-action@v1
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
+    
     - name: Build and push Docker image
+      id: docker_build
       uses: docker/build-push-action@v2
       with:
         context: .
         push: true
-        tags: |
-          ${{ secrets.DOCKERHUB_USERNAME }}/cicd-node-express-rest-api-example:latest
-          ${{ secrets.DOCKERHUB_USERNAME }}/cicd-node-express-rest-api-example:${{ github.sha }}
+        tags: ${{ secrets.DOCKERHUB_USERNAME }}/cicd-node-express-rest-api-example:latest
         dockerfile: Dockerfile
-        username: ${{ secrets.DOCKERHUB_USERNAME }}
-        password: ${{ secrets.DOCKERHUB_TOKEN }}
